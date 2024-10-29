@@ -1,7 +1,9 @@
 # Insta-DAM
 
-Estructura
+```markdown
+# Estructura
 
+```
 InstaDAM/
 ├── android/                    # Archivos específicos de Android
 ├── ios/                        # Archivos específicos de iOS
@@ -14,9 +16,9 @@ InstaDAM/
 │   │   ├── login_screen.dart   # Pantalla de inicio de sesión
 │   │   └── profile_screen.dart # Pantalla de perfil
 │   ├── widgets/                # Widgets reutilizables
-│   │   └── custom.dart  # <!--TODO: -->
+│   │   └── custom.dart         
 │   ├── services/               # Servicios (API, autenticación, etc.)
-│   │   └── data_service.dart    # Ejemplo de servicio API
+│   │   └── data_service.dart   # Ejemplo de servicio API
 │   ├── utils/                  # Utilidades y funciones auxiliares
 │   │   └── constants.dart      # Constantes de la aplicación
 │   └── providers/              # Proveedores para el manejo de estado
@@ -25,3 +27,4 @@ InstaDAM/
 │   └── widget_test.dart        # Ejemplo de prueba de widget
 ├── pubspec.yaml                # Archivo de configuración de dependencias
 └── README.md                   # Documentación del proyecto
+```
