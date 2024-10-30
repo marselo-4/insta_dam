@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('InstaDam'),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
       body: PageView(
         controller: _pageController,

@@ -6,13 +6,26 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/home');
-        },
-        child: const Text('Login'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset("assets/img/error.png"),
+                const Text("Eslogan"),
+                TextField(),
+                TextField(),
+                ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/home');}, child: Text("Enter")),
+                ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/signup');}, child: Text("Register"))
+              ],
+          ),
       ),
-    ));
+    );
   }
 }
+
+
+// TODO: Logo
+// TODO: Eslogan
+// TODO: Username + password
+// TODO: Enter button --> home_screen
+// TODO: Register button --> signup_screen
