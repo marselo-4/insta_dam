@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Image.asset("assets/img/profile_image.png", width: 100, height: 100,)
+                  child: CircleAvatar(backgroundImage: "profile_image.png",)
                 )
               ],
             )

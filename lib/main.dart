@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:insta_dam/screens/home_screen.dart';
 import 'package:insta_dam/screens/landing_screen.dart';
+import 'package:insta_dam/screens/login_screen.dart';
+import 'package:insta_dam/screens/post_screen.dart';
 import 'package:insta_dam/screens/profile_screen.dart';
+import 'package:insta_dam/screens/settings_screen.dart';
+import 'package:insta_dam/screens/signup_screen.dart';
 
 void main() {
   runApp(const InstaDam());
@@ -15,10 +20,17 @@ class InstaDam extends StatelessWidget {
     return MaterialApp( 
       debugShowCheckedModeBanner: false,
       title: 'InstaDam',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const ProfileScreen(),
+      home: const LandingScreen(),
+      initialRoute: '/landing',
+      routes: {
+        '/landing': (context) => const LandingScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignUpScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/post': (context) => const PostScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/settings': (context) => const SettingsScreen(),
+      },
     );
   }
 }
