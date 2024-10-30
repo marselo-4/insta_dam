@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insta_dam/screens/post_screen.dart';
-import 'package:insta_dam/screens/profile_screen.dart';
-import 'package:insta_dam/screens/settings_screen.dart';
+import 'package:insta_dam/screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,8 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
             _selectedIndex = index;
           });
         },
-        children: [
-          Center(child: Text('Home Page')),
+        physics: const NeverScrollableScrollPhysics(), // Disable horizontal scrolling
+        children: const [
+          FeedScreen(),
           PostScreen(),
           ProfileScreen(),
           SettingsScreen(),
