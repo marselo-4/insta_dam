@@ -30,11 +30,23 @@ class ProfileScreen extends StatelessWidget {
             height: 120,
             color: Colors.blue,
             padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Row(
+            child:  Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const Align(
+                  alignment: FractionalOffset(.2, .5),
+                  child: CircleAvatar(backgroundImage: NetworkImage("https://media.licdn.com/dms/image/v2/D5603AQHyYxdhP8mV2Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719498858258?e=2147483647&v=beta&t=k2WoJyiwPQnDjvjr9wvnazb1eGIL519yW_sxjdujmtI"),
+                  radius: 55,)
+                ),
+                
                 Align(
-                  alignment: Alignment.centerLeft,
-                  child: CircleAvatar(backgroundImage: "profile_image.png",)
+                  alignment: const FractionalOffset(.5, .5),
+                  child: ElevatedButton(onPressed: () {}, child: const Text("Seguir")),
+                ),
+
+                Align(
+                  alignment: const FractionalOffset(.5, .5),
+                  child: ElevatedButton(onPressed: () {}, child: const Text("Mensaje")),
                 )
               ],
             )
