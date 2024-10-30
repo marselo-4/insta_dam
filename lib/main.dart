@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta_dam/screens/landing_screen.dart';
+import 'package:insta_dam/screens/profile_screen.dart';
 
 void main() {
   runApp(const InstaDam());
@@ -17,7 +18,7 @@ class InstaDam extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LandingScreen(),
+      home: const ProfileScreen(),
     );
   }
 }
