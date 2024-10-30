@@ -14,8 +14,8 @@ class SignUpScreen extends StatelessWidget {
           TextField(),
           TextField(),
           TextField(),
-          ElevatedButton(onPressed: () {}, child: Text("Create account")),
-          ElevatedButton(onPressed: () {}, child: Text("Login"))
+          ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/home');}, child: Text("Create account")),
+          ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/login');}, child: Text("Login"))
         ],
       ),
     );

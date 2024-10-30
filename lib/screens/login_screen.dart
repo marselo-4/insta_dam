@@ -14,8 +14,8 @@ class LoginScreen extends StatelessWidget {
                 const Text("Eslogan"),
                 TextField(),
                 TextField(),
-                ElevatedButton(onPressed: () {}, child: Text("Enter")),
-                ElevatedButton(onPressed: () {}, child: Text("Register"))
+                ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/home');}, child: Text("Enter")),
+                ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/signup');}, child: Text("Register"))
               ],
           ),
       ),
