@@ -40,11 +40,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
                     const TextField(

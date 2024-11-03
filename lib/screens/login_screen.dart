@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                  height: 20,
                ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const  EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     const TextField(
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textStyle: const TextStyle(fontSize: 18),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    child: Text(
+                    child: const Text(
                       'Signup',
                       style: TextStyle(
                         color: Colors.black,
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textStyle: const TextStyle(fontSize: 14),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    child: Text(
+                    child: const Text(
                       'Enter',
                       style: TextStyle(
                           color: Colors.black,
@@ -156,4 +156,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
