@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('InstaDam'),
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
       ),
       body: PageView(
         controller: _pageController,
@@ -66,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.black87,
         selectedItemColor: Colors.black,
         showUnselectedLabels: false,
+        unselectedLabelStyle: const TextStyle(fontSize: 0),
       ),
     );
   }
