@@ -8,12 +8,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool visible1 = true;
-  bool visible2 = true;
+  bool toggleVisibility1 = true;
+  bool toggleVisibilty2 = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            backgroundColor: Colors.white,
+
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -116,18 +118,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
                           suffixIcon: IconButton(  color: Colors.pinkAccent,
-                            icon: Icon(visible1
+                            icon: Icon(toggleVisibility1
                                 ? Icons.visibility_off
                                 : Icons.visibility),
                             onPressed: () {
                               setState(() {
-                                visible1 = !visible1;
+                                toggleVisibility1 = !toggleVisibility1;
                               });
                             },
                           )),
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.next,
-                      obscureText: visible1,
+                      obscureText: toggleVisibility1,
                     ),
                     const SizedBox(height: 20),
                     TextField(
@@ -145,48 +147,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
                           suffixIcon: IconButton(  color: Colors.pinkAccent,
-                            icon: Icon(visible2
+                            icon: Icon(toggleVisibilty2
                                 ? Icons.visibility_off
                                 : Icons.visibility),
                             onPressed: () {
                               setState(() {
-                                visible2 = !visible2;
+                                toggleVisibilty2 = !toggleVisibilty2;
                               });
                             },
                           )),
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.next,
-                      obscureText: visible2,
+                      obscureText: toggleVisibilty2,
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 50),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                           Colors.black,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 10),
-                        textStyle: const TextStyle(fontSize: 18),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
+                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
                     },
@@ -206,6 +187,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontSize: 20),
                     ),
                   ),
+                  SizedBox(height: 25,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Already have an account?",
+                        style: TextStyle(
+                            fontSize: 16,    ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/login");
+                          },
+                          child: const Text(
+                            "Log in here!",
+                            style: TextStyle(
+                                color: Colors.pinkAccent,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  ),
+                 
                 ],
               )
             ],
@@ -215,3 +219,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
+
+
+//TODO: Fer la navegacio cap a login amb un text y no un boto apart

@@ -45,11 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-               const SizedBox(
-                 height: 20,
-               ),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
-                padding: const  EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     const TextField(
@@ -57,7 +57,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelText: 'Username',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
-                        prefixIcon: Icon(Icons.person, color: Colors.pinkAccent,),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.pinkAccent,
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.pinkAccent, width: 3.0),
@@ -75,15 +78,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelStyle: const TextStyle(
                               color: Colors.black, fontSize: 15),
                           enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.black, width: 2.0),
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 2.0),
                           ),
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.pinkAccent, width: 3.0),
                           ),
-                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
-                          suffixIcon: IconButton(  color: Colors.pinkAccent,
+                          prefixIcon: const Icon(
+                            Icons.lock_outline_rounded,
+                            color: Colors.pinkAccent,
+                          ),
+                          suffixIcon: IconButton(
+                            color: Colors.pinkAccent,
                             icon: Icon(visible
                                 ? Icons.visibility_off
                                 : Icons.visibility),
@@ -103,40 +110,17 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 40,
               ),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/signup');
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 10),
-                        textStyle: const TextStyle(fontSize: 18),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    child: const Text(
-                      'Signup',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            
-                             Colors.pinkAccent ,
+                        backgroundColor: Colors.pinkAccent,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 60, vertical: 15),
-                        textStyle: const TextStyle(fontSize: 14),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     child: const Text(
@@ -144,8 +128,32 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 2),
+                          fontSize: 18),
                     ),
+                  ),
+                 const  SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(
+                            fontSize: 16,    ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/signup");
+                          },
+                          child: const Text(
+                            "Sign up here!",
+                            style: TextStyle(
+                                color: Colors.pinkAccent,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ))
+                    ],
                   ),
                 ],
               )
