@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/img/logo.png",
+                "assets/img/logo.jpg",
                 width: 200,
                 height: 100,
               ),
@@ -56,11 +56,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                         labelText: 'Username',
                         labelStyle:
-                            TextStyle(color: Colors.lightBlue, fontSize: 15),
-                        prefixIcon: Icon(Icons.person, color: Colors.lightBlue,),
+                            TextStyle(color: Colors.black, fontSize: 15),
+                        prefixIcon: Icon(Icons.person, color: Colors.pinkAccent,),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.greenAccent, width: 3.0),
+                              BorderSide(color: Colors.pinkAccent, width: 3.0),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
@@ -73,17 +73,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: const TextStyle(
-                              color: Colors.lightBlue, fontSize: 15),
+                              color: Colors.black, fontSize: 15),
                           enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.black, width: 2.0),
                           ),
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.greenAccent, width: 3.0),
+                                color: Colors.pinkAccent, width: 3.0),
                           ),
-                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.lightBlue,),
-                          suffixIcon: IconButton(  color: Colors.lightBlue,
+                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
+                          suffixIcon: IconButton(  color: Colors.pinkAccent,
                             icon: Icon(visible
                                 ? Icons.visibility_off
                                 : Icons.visibility),
@@ -111,8 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushNamed(context, '/signup');
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 100, 150, 238),
+                        backgroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 10),
                         textStyle: const TextStyle(fontSize: 18),
@@ -121,9 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       'Signup',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                     ),
                   ),
@@ -133,7 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            const Color.fromARGB(255, 125, 247, 131),
+                            
+                             Colors.pinkAccent ,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 60, vertical: 15),
                         textStyle: const TextStyle(fontSize: 14),
@@ -142,9 +142,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       'Enter',
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 20),
+                          fontSize: 2),
                     ),
                   ),
                 ],

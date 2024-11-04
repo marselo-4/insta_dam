@@ -20,7 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/img/logo.png",
+                "assets/img/logo.jpg",
                 width: 100,
                 height: 75,
               ),
@@ -51,11 +51,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         labelText: 'Name',
                         labelStyle:
-                            TextStyle(color: Colors.lightBlue, fontSize: 15),
-                        prefixIcon: Icon(Icons.person , color: Colors.lightBlue,),
+                            TextStyle(color: Colors.black, fontSize: 15),
+                        prefixIcon: Icon(Icons.person , color: Colors.pinkAccent,),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.greenAccent, width: 3.0),
+                              BorderSide(color: Colors.pinkAccent, width: 3.0),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
@@ -69,11 +69,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         labelText: 'Surname',
                         labelStyle:
-                            TextStyle(color: Colors.lightBlue, fontSize: 15),
-                        prefixIcon: Icon(Icons.person , color: Colors.lightBlue,),
+                            TextStyle(color: Colors.black, fontSize: 15),
+                        prefixIcon: Icon(Icons.person , color: Colors.pinkAccent,),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.greenAccent, width: 3.0),
+                              BorderSide(color: Colors.pinkAccent, width: 3.0),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
@@ -87,11 +87,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         labelText: 'Username',
                         labelStyle:
-                            TextStyle(color: Colors.lightBlue, fontSize: 15),
-                        prefixIcon: Icon(Icons.person , color: Colors.lightBlue,),
+                            TextStyle(color: Colors.black, fontSize: 15),
+                        prefixIcon: Icon(Icons.person , color: Colors.pinkAccent,),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.greenAccent, width: 3.0),
+                              BorderSide(color: Colors.pinkAccent, width: 3.0),
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
@@ -105,17 +105,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: const TextStyle(
-                              color: Colors.lightBlue, fontSize: 15),
+                              color: Colors.black, fontSize: 15),
                           enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.black, width: 2.0),
                           ),
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.greenAccent, width: 3.0),
+                                color: Colors.pinkAccent, width: 3.0),
                           ),
-                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.lightBlue,),
-                          suffixIcon: IconButton(  color: Colors.lightBlue,
+                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
+                          suffixIcon: IconButton(  color: Colors.pinkAccent,
                             icon: Icon(visible1
                                 ? Icons.visibility_off
                                 : Icons.visibility),
@@ -134,17 +134,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                           labelText: 'Repeat',
                           labelStyle: const TextStyle(
-                              color: Colors.lightBlue, fontSize: 15),
+                              color: Colors.pinkAccent, fontSize: 15),
                           enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.black, width: 2.0),
                           ),
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.greenAccent, width: 3.0),
+                                color: Colors.pinkAccent, width: 3.0),
                           ),
-                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.lightBlue,),
-                          suffixIcon: IconButton(  color: Colors.lightBlue,
+                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
+                          suffixIcon: IconButton(  color: Colors.pinkAccent,
                             icon: Icon(visible2
                                 ? Icons.visibility_off
                                 : Icons.visibility),
@@ -171,16 +171,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            const Color.fromARGB(255, 125, 247, 131),
+                           Colors.black,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                            horizontal: 30, vertical: 10),
                         textStyle: const TextStyle(fontSize: 18),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     child: const Text(
                       'Login',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                       ),
@@ -192,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            const Color.fromARGB(255, 100, 150, 238),
+                            Colors.pinkAccent,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 15),
                         textStyle: const TextStyle(fontSize: 14),
@@ -201,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: const Text(
                       'Create account',
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 20),
                     ),
