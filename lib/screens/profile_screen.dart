@@ -11,14 +11,24 @@
   }
 
   class _ProfileScreenState extends State<ProfileScreen> {
+    List<String> posts = [
+      'https://picsum.photos/500/800',
+      'https://picsum.photos/500/800',
+      'https://picsum.photos/500/800',
+      'https://picsum.photos/500/800',
+      'https://picsum.photos/500/800',
+
+    ];
     String avatarUrl = "https://picsum.photos/200";
-    String postNumber = Random().nextInt(10).toString();
     String followersNumber = Random().nextInt(1000).toString();
     String followingNumber = Random().nextInt(100).toString();
+    String username = "alvaromillaness";
     String accName = 'Alvaro Millanes Sabaté';
-  String descripcion = 'Viviendo una aventura a la vez 🌍✨\n'
+    String descripcion = 'Viviendo una aventura a la vez 🌍✨\n'
       'Aquí para compartir lo que amo y lo que hago ❤️\n'
       'Amante de los pequeños detalles y las grandes experiencias 🌟';
+
+    
 
     @override
     Widget build(BuildContext context) {
@@ -27,16 +37,17 @@
             children: [
               Container(
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.amber,
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Text(
-                    'bazoca33',
-                    style: TextStyle(
+                  child: Align(
+                    alignment: const FractionalOffset(.05, 2),
+                    child: Text(
+                    username,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  )
                 ),
           
           //foto + seguidores, seguidos...
@@ -56,7 +67,7 @@
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(postNumber, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                      Text(posts.length.toString(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                       const Text("pubicaciones")
                     ],
                   ),
@@ -156,11 +167,21 @@
           ),
           //posts
           Expanded(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.green,
-            ),
+            child: GridView.builder(
+              
+              itemCount: posts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3), 
+              itemBuilder: (context, index){
+                return Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    child: Image.network(posts[index], fit: BoxFit.cover,)
+                  ),
+                );
+              }
+              ),
           ),
           
             ],
