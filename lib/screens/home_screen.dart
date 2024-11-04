@@ -66,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: Colors.black87,
         selectedItemColor: Colors.black,
         showUnselectedLabels: false,
+        unselectedLabelStyle: const TextStyle(fontSize: 0),
       ),
     );
   }

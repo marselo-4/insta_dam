@@ -5,6 +5,24 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(),
+          TextField(),
+          TextField(),
+          TextField(),
+          TextField(),
+          ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/home');}, child: Text("Create account")),
+          ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/login');}, child: Text("Login"))
+        ],
+      ),
+    );
   }
 }
+
+// TODO: name, surname, usarname(id unique), password, repeat
+// TODO: Create account button
+// TODO:  Shared prefernces check id unic username
+// TODO: Login button --> login_screen

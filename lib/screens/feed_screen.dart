@@ -35,7 +35,7 @@ final List<Post> posts = [
       ),
     ];
 
-    return  Scaffold(
+    return Scaffold(
       body: Column(
         children: [
           SizedBox(
