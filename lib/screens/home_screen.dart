@@ -23,7 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('InstaDam'),
+        title: Image.asset(
+          'assets/img/instadam.jpg',
+          height: 30,
+        ),
         automaticallyImplyLeading: false,
       ),
       body: PageView(
