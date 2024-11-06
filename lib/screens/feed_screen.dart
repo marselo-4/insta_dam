@@ -40,7 +40,7 @@ final List<Post> posts = [
         children: [
           SizedBox(
             height: 100,
-            child: StoriesWidget()
+            child: StoriesWidget(),
           ),
           PostWidget(posts: posts,)
         ],

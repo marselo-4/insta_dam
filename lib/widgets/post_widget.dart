@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Post {
@@ -5,25 +7,32 @@ class Post {
   final String userName;
   final String postImageUrl;
   bool isLiked;
+  List<Map<String, String>> comments;
 
   Post({
     required this.avatarUrl,
     required this.userName,
     required this.postImageUrl,
     this.isLiked = false,
+    this.comments = const [
+      {'user': 'Carlos', 'comment': 'Lets fucking go!'},
+    ],
   });
 }
 
 class PostWidget extends StatefulWidget {
   final List<Post> posts;
 
-  PostWidget({required this.posts});
+  const PostWidget({super.key, required this.posts});
 
   @override
-  _PostWidgetState createState() => _PostWidgetState();
+  PostWidgetState createState() => PostWidgetState();
 }
 
-class _PostWidgetState extends State<PostWidget> {
+class PostWidgetState extends State<PostWidget> {
+  final TextEditingController _commentController = TextEditingController();
+  int? _selectedPostIndex;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -32,8 +41,8 @@ class _PostWidgetState extends State<PostWidget> {
         itemBuilder: (context, index) {
           final post = widget.posts[index];
           return Card(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: SizedBox(
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -44,36 +53,38 @@ class _PostWidgetState extends State<PostWidget> {
                       children: [
                         CircleAvatar(
                           radius: 20,
-                          backgroundImage: NetworkImage(post.avatarUrl), // Avatar URL from Post object
+                          backgroundImage: NetworkImage(post.avatarUrl),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
-                          post.userName, // Username from Post object
-                          style: TextStyle(
+                          post.userName,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       width: double.infinity,
-                      height: 300, // Fixed height for post image
+                      height: 300,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(post.postImageUrl), // Post image URL from Post object
+                          image: NetworkImage(post.postImageUrl),
                           fit: BoxFit.cover,
                         ),
-                        color: Colors.grey[300], // Placeholder color
+                        color: Colors.grey[300],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         IconButton(
                           icon: Icon(
-                            post.isLiked ? Icons.favorite : Icons.favorite_border,
+                            post.isLiked
+                                ? Icons.favorite
+                                : Icons.favorite_border,
                             color: post.isLiked ? Colors.red : null,
                           ),
                           onPressed: () {
@@ -83,12 +94,85 @@ class _PostWidgetState extends State<PostWidget> {
                           },
                         ),
                         IconButton(
-                          icon: Icon(Icons.comment),
-                          onPressed: () {},
+                          icon: const Icon(Icons.chat_bubble_rounded),
+                          onPressed: () {
+                            setState(() {
+                              _selectedPostIndex = index;
+                            });
+                          },
                         ),
                         IconButton(
-                          icon: Icon(Icons.share),
+                          icon: const Icon(Icons.send_rounded),
                           onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Liked by ${post.userName} and 100 others',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'View all ${post.comments.length} comments',
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        ...post.comments.map((comment) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${comment['user']}: ${comment['comment']}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                            ],
+                          );
+                        }),
+                        if (_selectedPostIndex == index)
+                            Row(
+                            children: [
+                              Expanded(
+                              child: TextField(
+                                controller: _commentController,
+                                decoration: const InputDecoration(
+                                hintText: 'Add a comment...',
+                                border: InputBorder.none,
+                                ),
+                              ),
+                              ),
+                              IconButton(
+                              icon: const Icon(Icons.send_rounded),
+                              onPressed: () {
+                                setState(() {
+                                post.comments = List.from(post.comments)..add({
+                                  'user': post.userName,
+                                  'comment': _commentController.text,
+                                });
+                                _commentController.clear();
+                                _selectedPostIndex = null;
+                                });
+                              },
+                              ),
+                            ],
+                            ),
+                        Text(
+                          Random().nextInt(23)+1 > 1
+                              ? '${Random().nextInt(24)} hours ago'
+                              :
+                          '${Random().nextInt(24)} hour ago',
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
