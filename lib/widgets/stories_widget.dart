@@ -9,7 +9,7 @@ class Story {
 
 class StoriesWidget extends StatelessWidget {
   final List<Story> stories = [
-    Story('https://avatars.githubusercontent.com/u/78843770?v=4', 'Carlos'),
+    Story('https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg', 'Me'),
     Story('https://media.licdn.com/dms/image/v2/D4D03AQFx6717ghkM1w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1713525824551?e=2147483647&v=beta&t=1Dmd1eLIq_ajfCuB5tDJVOA72RKlVzbM6H62HQmXiNI', 'Lujan'),
     Story('https://picsum.photos/200', 'Alvaro'),
     Story('https://media.licdn.com/dms/image/v2/D5603AQHyYxdhP8mV2Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719498858258?e=2147483647&v=beta&t=k2WoJyiwPQnDjvjr9wvnazb1eGIL519yW_sxjdujmtI', 'Jass'),
