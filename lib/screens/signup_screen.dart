@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -94,8 +95,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 20),
-                    const TextField(
-                      decoration: InputDecoration(
+                     TextField(
+                      controller: controllerUsername,
+                      decoration: const InputDecoration(
                         labelText: 'Username',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
@@ -191,6 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      
                       _checkInput(
                           controllerUsername,
                           controllerPassword,
@@ -245,13 +248,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
 }
 
-void _checkInput(
+
+
+Future<void> _checkInput(
     TextEditingController controllerUsername,
     TextEditingController controllerPassword,
     TextEditingController controllerPassword2,
-    BuildContext context) {
+    BuildContext context) async {
+
+
+  void saveUsername() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', controllerUsername.text);
+  }
+
+  void savePassword() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('password', controllerPassword.text);
+  }
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? username = prefs.getString("username");
+
   if (controllerUsername.text.isEmpty || controllerPassword.text.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -273,7 +294,17 @@ void _checkInput(
         duration: Duration(seconds: 2),
       ),
     );
+  }else if (controllerUsername.text == username) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Username already chosen'), 
+      duration: Duration(seconds: 2),));
   } else {
+    savePassword();
+    saveUsername();
     Navigator.pushNamed(context, '/home');
   }
+
+
 }
+
+
