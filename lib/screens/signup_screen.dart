@@ -11,6 +11,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool toggleVisibility1 = true;
   bool toggleVisibilty2 = true;
 
+  TextEditingController controllerUsername = TextEditingController();
+  TextEditingController controllerPassword = TextEditingController();
+  TextEditingController controllerPassword2 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: controllerPassword,
                       decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: const TextStyle(
@@ -145,6 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: controllerPassword2,
                       decoration: InputDecoration(
                           labelText: 'Repeat',
                           labelStyle: const TextStyle(
@@ -185,7 +191,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      _checkInput(
+                          controllerUsername,
+                          controllerPassword,
+                          controllerPassword2,
+                          context);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.pinkAccent,
@@ -234,5 +244,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+}
+
+void _checkInput(
+    TextEditingController controllerUsername,
+    TextEditingController controllerPassword,
+    TextEditingController controllerPassword2,
+    BuildContext context) {
+  if (controllerUsername.text.isEmpty || controllerPassword.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Please fill in all the fields'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  } else if (controllerPassword.text.length < 6) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Password must be at least 6 characters long'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  } else if (controllerPassword.text != controllerPassword2.text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Passwords do not match'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  } else {
+    Navigator.pushNamed(context, '/home');
   }
 }
