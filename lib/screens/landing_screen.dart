@@ -48,12 +48,13 @@ class _LandingScreenState extends State<LandingScreen> {
         controller: _pageController,
         onPageChanged: (index) {
           if (index == 2) {
-        _navigateToLogin();
+            _navigateToLogin();
           }
         },
         children: [
-          landingWidget("assets/img/marketing.png", "¡Descubre la mejor app para publicitar tu negocio!"),
-          landingWidget("assets/img/error.png", "Ahorra tiempo y dinero con nosotros"),
+          landingWidget(
+              "assets/img/ilustracion.png", "¡Capture. Share Your Story!"),
+          landingWidget("assets/img/phone.png", "¡Create. Connect. Inspire!"),
           Container()
         ],
       ),
