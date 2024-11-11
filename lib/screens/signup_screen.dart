@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -8,6 +9,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController usernameValue = TextEditingController();
+  TextEditingController passwordValue = TextEditingController();
+
   bool toggleVisibility1 = true;
   bool toggleVisibilty2 = true;
 
@@ -90,8 +94,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 20),
-                    const TextField(
-                      decoration: InputDecoration(
+                     TextField(
+                      controller: usernameValue,
+                      decoration: const InputDecoration(
                         labelText: 'Username',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
@@ -112,6 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: passwordValue,
                       decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: const TextStyle(
@@ -185,7 +191,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                    getUsername();
+                      
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.pinkAccent,
@@ -235,4 +242,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+  
+void saveUsername() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('username', usernameValue.text);
+  print("username guardado correctamente: " + usernameValue.text);
+}
+
+void savePassword() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('password', passwordValue.text);
+  print("password guardada correctamente: $passwordValue");
+}
+
+void getUsername() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? username = prefs.getString("username");
+
+  if (usernameValue.text == username) {
+     print("usuario guardado: " + usernameValue.text);
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Username already chosen'), 
+      duration: Duration(seconds: 2),));
+  }else{
+    savePassword();
+    saveUsername();
+    Navigator.pushNamed(context, '/home');
+
+  }
+
+ 
+}
+
 }
