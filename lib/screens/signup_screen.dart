@@ -14,8 +14,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: Colors.white,
-
+      backgroundColor: Colors.white,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -54,7 +53,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Name',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
-                        prefixIcon: Icon(Icons.person , color: Colors.pinkAccent,),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.pinkAccent,
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.pinkAccent, width: 3.0),
@@ -72,7 +74,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Surname',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
-                        prefixIcon: Icon(Icons.person , color: Colors.pinkAccent,),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.pinkAccent,
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.pinkAccent, width: 3.0),
@@ -90,7 +95,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Username',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
-                        prefixIcon: Icon(Icons.person , color: Colors.pinkAccent,),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.pinkAccent,
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.pinkAccent, width: 3.0),
@@ -109,15 +117,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           labelStyle: const TextStyle(
                               color: Colors.black, fontSize: 15),
                           enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.black, width: 2.0),
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 2.0),
                           ),
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.pinkAccent, width: 3.0),
                           ),
-                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
-                          suffixIcon: IconButton(  color: Colors.pinkAccent,
+                          prefixIcon: const Icon(
+                            Icons.lock_outline_rounded,
+                            color: Colors.pinkAccent,
+                          ),
+                          suffixIcon: IconButton(
+                            color: Colors.pinkAccent,
                             icon: Icon(toggleVisibility1
                                 ? Icons.visibility_off
                                 : Icons.visibility),
@@ -136,17 +148,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                           labelText: 'Repeat',
                           labelStyle: const TextStyle(
-                              color: Colors.pinkAccent, fontSize: 15),
+                              color: Colors.black, fontSize: 15),
                           enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.black, width: 2.0),
+                            borderSide:
+                                BorderSide(color: Colors.black, width: 2.0),
                           ),
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.pinkAccent, width: 3.0),
                           ),
-                          prefixIcon: const Icon(Icons.lock_outline_rounded , color: Colors.pinkAccent,),
-                          suffixIcon: IconButton(  color: Colors.pinkAccent,
+                          prefixIcon: const Icon(
+                            Icons.lock_outline_rounded,
+                            color: Colors.pinkAccent,
+                          ),
+                          suffixIcon: IconButton(
+                            color: Colors.pinkAccent,
                             icon: Icon(toggleVisibilty2
                                 ? Icons.visibility_off
                                 : Icons.visibility),
@@ -167,13 +183,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                   ElevatedButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.pinkAccent,
+                        backgroundColor: Colors.pinkAccent,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 15),
                         textStyle: const TextStyle(fontSize: 14),
@@ -187,14 +202,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontSize: 20),
                     ),
                   ),
-                  SizedBox(height: 25,),
+                  const SizedBox(
+                    height: 25,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Already have an account?",
                         style: TextStyle(
-                            fontSize: 16,    ),
+                          fontSize: 16,
+                        ),
                       ),
                       TextButton(
                           onPressed: () {
@@ -209,7 +227,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ))
                     ],
                   ),
-                 
                 ],
               )
             ],
@@ -219,6 +236,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
-
-
-//TODO: Fer la navegacio cap a login amb un text y no un boto apart
