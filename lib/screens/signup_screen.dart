@@ -193,7 +193,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                    getUsername();
                       
                       _checkInput(
                           controllerUsername,
@@ -249,42 +248,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-  
-void saveUsername() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('username', controllerUsername.text);
-}
-
-void savePassword() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('password', controllerPassword.text);
-}
-
-void getUsername() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? username = prefs.getString("username");
-
-  if (controllerUsername.text == username) {
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Username already chosen'), 
-      duration: Duration(seconds: 2),));
-  }else{
-    savePassword();
-    saveUsername();
-    Navigator.pushNamed(context, '/home');
-
-  }
-
- 
-}
 
 }
 
-void _checkInput(
+
+
+Future<void> _checkInput(
     TextEditingController controllerUsername,
     TextEditingController controllerPassword,
     TextEditingController controllerPassword2,
-    BuildContext context) {
+    BuildContext context) async {
+
+
+  void saveUsername() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', controllerUsername.text);
+  }
+
+  void savePassword() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('password', controllerPassword.text);
+  }
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? username = prefs.getString("username");
+
   if (controllerUsername.text.isEmpty || controllerPassword.text.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -306,7 +294,17 @@ void _checkInput(
         duration: Duration(seconds: 2),
       ),
     );
+  }else if (controllerUsername.text == username) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Username already chosen'), 
+      duration: Duration(seconds: 2),));
   } else {
+    savePassword();
+    saveUsername();
     Navigator.pushNamed(context, '/home');
   }
+
+
 }
+
+
