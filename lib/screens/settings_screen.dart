@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -8,121 +9,80 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String? _selectedList = "Lorem";
-  bool? valueBox = false;
+  bool valueSwitch = false;
+
+  @override
+  void initState() {
+    loadValueSwitch();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(padding: const EdgeInsets.all(16), children: [
-        ItemSettings(
-          title: 'Save login data',
-          icon: Icons.account_circle,
-          trailing: Checkbox(value: valueBox, onChanged: (bool? value) {setState(() {
-            valueBox = value;
-          });}  ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Settings',
         ),
-        ItemSettings(
-          title: 'Lorem',
-          icon: Icons.font_download,
-          trailing: DropdownButton<String>(
-            value: _selectedList,
-            items: const [
-              DropdownMenuItem(
-                value: "Lorem",
-                child: Text("Lorem"),
-              ),
-              DropdownMenuItem(
-                value: "Lorem 2",
-                child: Text("Lorem 2"),
-              ),
-            ],
-            onChanged: (String? newValue) {
-              setState(() {
-                _selectedList = newValue;
-              });
-            },
-          ),
-        ),
-         ItemSettings(
-          title: 'Lorem',
-          icon: Icons.login,
-          trailing: Checkbox(value: valueBox, onChanged: (bool? value) {setState(() {
-            valueBox = value;
-          });}  ),
-        ),
-        ItemSettings(
-          title: 'Lorem',
-          icon: Icons.font_download,
-          trailing: DropdownButton<String>(
-            value: _selectedList,
-            items: const [
-              DropdownMenuItem(
-                value: "Lorem",
-                child: Text("Lorem"),
-              ),
-              DropdownMenuItem(
-                value: "Lorem 2",
-                child: Text("Lorem 2"),
-              ),
-            ],
-            onChanged: (String? newValue) {
-              setState(() {
-                _selectedList = newValue;
-              });
-            },
-          ),
-        ),
-         ItemSettings(
-          title: 'Lorem',
-          icon: Icons.login,
-          trailing: Checkbox(value: valueBox, onChanged: (bool? value) {setState(() {
-            valueBox = value;
-          });}  ),
-        ),
-        ItemSettings(
-          title: 'Lorem',
-          icon: Icons.font_download,
-          trailing: DropdownButton<String>(
-            value: _selectedList,
-            items: const [
-              DropdownMenuItem(
-                value: "Lorem",
-                child: Text("Lorem"),
-              ),
-              DropdownMenuItem(
-                value: "Lorem 2",
-                child: Text("Lorem 2"),
-              ),
-            ],
-            onChanged: (String? newValue) {
-              setState(() {
-                _selectedList = newValue;
-              });
-            },
-          ),
-        ),
-
-         ItemSettings(
-          title: 'Lorem',
-          icon: Icons.login,
-          trailing: Checkbox(value: valueBox, onChanged: (bool? value) {setState(() {
-            valueBox = value;
-          });}  ),
-        ),
-    
-         ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 248, 34, 19),
-              foregroundColor:  Colors.black,
+        automaticallyImplyLeading: false,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          ItemSettings(
+            title: 'Save login data',
+            icon: Icons.account_circle_outlined,
+            trailing: Switch(
+              value: valueSwitch,
+              activeColor: Colors.pinkAccent,
+              onChanged: (bool value) {
+                setState(
+                  () {
+                    valueSwitch = value;
+                    saveValueSwitch();
+                  },
+                );
+              },
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, '/login');
-            },
-            child: const Text("Log out", style: TextStyle(fontSize: 18),),
           ),
-      ]),
+          ItemSettingsButton(
+            title: 'Clear login credentials',
+            icon: Icons.delete_outline,
+            onTapFunction: () => popupClearCredentials(context),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.pinkAccent,
+                foregroundColor: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: const Text(
+                "Log out",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
+  }
+
+  void saveValueSwitch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isRemembered', valueSwitch);
+  }
+
+  Future<void> loadValueSwitch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      valueSwitch = prefs.getBool('isRemembered') ?? false;
+    });
   }
 }
 
@@ -145,30 +105,119 @@ class ItemSettings extends StatefulWidget {
 class _ItemSettingsState extends State<ItemSettings> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        children: [
-          Icon(widget.icon, size: 24.0), 
-          const SizedBox(width: 10.0), 
-          Expanded(
-            child: Text(
-              widget.title,
-              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Row(
+          children: [
+            Icon(widget.icon, size: 24.0),
+            const SizedBox(width: 10.0),
+            Expanded(
+              child: Text(
+                widget.title,
+                style: const TextStyle(
+                    fontSize: 16.0, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          if (widget.trailing != null) widget.trailing!,
-        ],
+            if (widget.trailing != null) widget.trailing!,
+          ],
+        ),
       ),
     );
   }
 }
-// TODO: Chechlist config ( Save LogIn data --> Mostrarlos en el login = autocomplete)
-// TODO: Fe us de persistencia per guardar aquesta llista
-// Boton de Salir --> Login
-// Conté un cheklist que com a mínim mostra una opció de configuració: guardar dades
-// d’inici de sessió.
-// Aquí aplicareu la persistència de dades. Aquestes dades cal guardar-les localment
-// fent ús del paquet shared_preferences.
-//I després mostrar les dades guardades a l’obrir l’app a la pantalla log-in. 
-//Conté un botó per sortir de la sessió de l’usuari que el retorna directament a la pantalla log-in.
+
+class ItemSettingsButton extends StatefulWidget {
+  const ItemSettingsButton(
+      {super.key,
+      required this.title,
+      required this.icon,
+      this.trailing,
+      required this.onTapFunction});
+
+  final String title;
+  final IconData icon;
+  final Widget? trailing;
+  final Function onTapFunction;
+
+  @override
+  State<ItemSettingsButton> createState() => _ItemSettingsButtonState();
+}
+
+class _ItemSettingsButtonState extends State<ItemSettingsButton> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: Row(
+            children: [
+              Icon(widget.icon, size: 24.0),
+              const SizedBox(width: 10.0),
+              Expanded(
+                child: Text(
+                  widget.title,
+                  style: const TextStyle(
+                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              if (widget.trailing != null) widget.trailing!,
+            ],
+          ),
+        ),
+      ),
+      onTap: () {
+        widget.onTapFunction();
+      },
+    );
+  }
+}
+
+Future<void> popupClearCredentials(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.white,
+        title: const Text('Clear credentials'),
+        content: const Text(
+          'Are you sure you want to clear the login credentials? This action cannot be undone.',
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(),
+            child: const Text(
+              'Accept',
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+              clearCredentials();
+            },
+          ),
+          TextButton(
+            style: TextButton.styleFrom(),
+            child: const Text(
+              'Cancel',
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> clearCredentials() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('Username');
+  await prefs.remove('Password');
+}
