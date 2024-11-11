@@ -19,7 +19,6 @@
       'https://picsum.photos/500/800',
 
     ];
-    String avatarUrl = "https://picsum.photos/200";
     String followersNumber = Random().nextInt(1000).toString();
     String followingNumber = Random().nextInt(100).toString();
     String username = "alvaromillaness";
@@ -60,9 +59,9 @@
                 child:  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Align(
-                      alignment: const FractionalOffset(.2, .5),
-                      child: CircleAvatar(backgroundImage: NetworkImage(avatarUrl),
+                    const Align(
+                      alignment: FractionalOffset(.2, .5),
+                      child: CircleAvatar(backgroundImage: AssetImage('assets/img/avatar.jpg'),
                       radius: 45,)
                     ),
                     
