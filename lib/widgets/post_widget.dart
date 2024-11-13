@@ -1,18 +1,19 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
 class Post {
-  final String avatarUrl;
+  //final String avatarImage;
   final String userName;
-  final String postImageUrl;
+  final String postImage;
   bool isLiked;
   List<Map<String, String>> comments;
 
   Post({
-    required this.avatarUrl,
+    //required this.avatarImage,
     required this.userName,
-    required this.postImageUrl,
+    required this.postImage,
     this.isLiked = false,
     this.comments = const [
       {'user': 'Carlos', 'comment': 'Lets fucking go!'},
@@ -51,9 +52,9 @@ class PostWidgetState extends State<PostWidget> {
                   children: [
                     Row(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 20,
-                          backgroundImage: NetworkImage(post.avatarUrl),
+                          backgroundImage: AssetImage('assets/img/avatar.jpg'),
                         ),
                         const SizedBox(width: 10),
                         Text(
@@ -71,7 +72,7 @@ class PostWidgetState extends State<PostWidget> {
                       height: 300,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(post.postImageUrl),
+                          image: FileImage(File(post.postImage)),
                           fit: BoxFit.cover,
                         ),
                         color: Colors.grey[300],

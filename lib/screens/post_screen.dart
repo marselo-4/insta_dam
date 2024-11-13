@@ -65,8 +65,7 @@ class _PostScreenState extends State<PostScreen> {
       final directory = await getApplicationDocumentsDirectory();
       final String imagePath = '${directory.path}/${image.name}';
 
-      final File savedImage = await File(image.path).copy(imagePath);
-      print('Imagen guardada en: $imagePath');
+      await File(image.path).copy(imagePath);
       
       //Guardar post en shared
       final postList = PostList();
@@ -76,23 +75,19 @@ class _PostScreenState extends State<PostScreen> {
       if (imageList != null && imageList.isNotEmpty) {
         imageList.add(imagePath);
         await prefs.setStringList('imageList', imageList);
-        print('LISTA IMAGES GUARDADA/ACTUALIZADA');
       }else{
         imageList = [];
         imageList.add(imagePath);
         await prefs.setStringList('imageList', imageList);
-        print('LISTA IMAGES CREADA');
       }
 
       if (descriptionList != null && descriptionList.isNotEmpty) {
         descriptionList.add(imagePath);
         await prefs.setStringList('descriptionList', descriptionList);
-        print('LISTA DESCRIPTION GUARDADA/ACTUALIZADA');
       }else{
         descriptionList = [];
         descriptionList.add(imagePath);
         await prefs.setStringList('descriptionList', descriptionList);
-        print('LISTA DESCRIPTION CREADA');
       }
     }
   }

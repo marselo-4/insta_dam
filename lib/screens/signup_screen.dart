@@ -13,6 +13,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool toggleVisibilty2 = true;
 
   TextEditingController controllerUsername = TextEditingController();
+  TextEditingController controllerName = TextEditingController();
+  TextEditingController controllerSurname = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerPassword2 = TextEditingController();
 
@@ -53,8 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: controllerName,
+                      decoration: const InputDecoration(
                         labelText: 'Name',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
@@ -74,8 +77,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 20),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: controllerSurname,
+                      decoration: const InputDecoration(
                         labelText: 'Surname',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
@@ -196,6 +200,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       
                       _checkInput(
                           controllerUsername,
+                          controllerName,
+                          controllerSurname,
                           controllerPassword,
                           controllerPassword2,
                           context);
@@ -255,20 +261,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 Future<void> _checkInput(
     TextEditingController controllerUsername,
+    TextEditingController controllerName,
+    TextEditingController controllerSurname,
     TextEditingController controllerPassword,
     TextEditingController controllerPassword2,
     BuildContext context) async {
 
 
-  void saveUsername() async{
+  void saveData() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', controllerUsername.text);
+    await prefs.setString('password', controllerPassword.text);
+    await prefs.setString('name', controllerName.text);
+    await prefs.setString('surname', controllerSurname.text);
   }
 
-  void savePassword() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('password', controllerPassword.text);
-  }
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? username = prefs.getString("username");
@@ -299,8 +306,7 @@ Future<void> _checkInput(
       content: Text('Username already chosen'), 
       duration: Duration(seconds: 2),));
   } else {
-    savePassword();
-    saveUsername();
+    saveData();
     Navigator.pushNamed(context, '/home');
   }
 
