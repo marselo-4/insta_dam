@@ -1,7 +1,9 @@
 import 'dart:io';
-
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:insta_dam/services/list_storage_services.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
@@ -33,7 +35,7 @@ class _PostScreenState extends State<PostScreen> {
     // TODO: Enviar los datos a la lista
     final String description = _descriptionController.text;
     if (_image != null && description.isNotEmpty) {
-      print('Publicar: ${_image!.path}, Descripción: $description');
+      savePost(_image, description);
       Navigator.pushNamed(context, '/home');
       setState(() {
         _image = null;
@@ -55,6 +57,46 @@ class _PostScreenState extends State<PostScreen> {
       );
     }
   }
+
+  void savePost(XFile? image, String description) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (image != null) {
+      //Guardar el path de la imagen
+      final directory = await getApplicationDocumentsDirectory();
+      final String imagePath = '${directory.path}/${image.name}';
+
+      final File savedImage = await File(image.path).copy(imagePath);
+      print('Imagen guardada en: $imagePath');
+      
+      //Guardar post en shared
+      final postList = PostList();
+      List<String>? imageList = await postList.getList('imageList');
+      List<String>? descriptionList = await postList.getList('descriptionList');
+
+      if (imageList != null && imageList.isNotEmpty) {
+        imageList.add(imagePath);
+        await prefs.setStringList('imageList', imageList);
+        print('LISTA IMAGES GUARDADA/ACTUALIZADA');
+      }else{
+        imageList = [];
+        imageList.add(imagePath);
+        await prefs.setStringList('imageList', imageList);
+        print('LISTA IMAGES CREADA');
+      }
+
+      if (descriptionList != null && descriptionList.isNotEmpty) {
+        descriptionList.add(imagePath);
+        await prefs.setStringList('descriptionList', descriptionList);
+        print('LISTA DESCRIPTION GUARDADA/ACTUALIZADA');
+      }else{
+        descriptionList = [];
+        descriptionList.add(imagePath);
+        await prefs.setStringList('descriptionList', descriptionList);
+        print('LISTA DESCRIPTION CREADA');
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
