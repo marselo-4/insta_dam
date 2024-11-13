@@ -10,7 +10,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  bool isDebugMode = false; //TODO: quitar debug mode para prod
   bool notvisible = true;
   bool isRemembered = true;
 
@@ -151,11 +150,7 @@ class LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        isDebugMode
-                            ? print(
-                                'Para hacer las comprobaciones quita debugmode')
-                            : checkUser();
+                      onPressed: () {checkUser();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.pinkAccent,

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:insta_dam/screens/feed_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,33 +33,30 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   void _publishPost() {
-    // TODO: Enviar los datos a la lista
     final String description = _descriptionController.text;
     if (_image != null && description.isNotEmpty) {
       savePost(_image, description);
-      Navigator.pushNamed(context, '/home');
       setState(() {
         _image = null;
         _descriptionController.clear();
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Post publicado'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     } else {
-      AlertDialog(
-        title: const Text('Error'),
-        content: const Text(
-            'No se ha seleccionado una imagen o no se ha añadido una descripción'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Aceptar'),
-          ),
-        ],
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("There's no image or description"),
+          duration: Duration(seconds: 2),
+        ),
       );
     }
   }
 
-  void savePost(XFile? image, String description) async{
+  void savePost(XFile? image, String description) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (image != null) {
       //Guardar el path de la imagen
@@ -66,7 +64,7 @@ class _PostScreenState extends State<PostScreen> {
       final String imagePath = '${directory.path}/${image.name}';
 
       await File(image.path).copy(imagePath);
-      
+
       //Guardar post en shared
       final postList = SharedPrefList();
       List<String>? imageList = await postList.getList('imageList');
@@ -75,7 +73,7 @@ class _PostScreenState extends State<PostScreen> {
       if (imageList != null && imageList.isNotEmpty) {
         imageList.add(imagePath);
         await prefs.setStringList('imageList', imageList);
-      }else{
+      } else {
         imageList = [];
         imageList.add(imagePath);
         await prefs.setStringList('imageList', imageList);
@@ -84,14 +82,13 @@ class _PostScreenState extends State<PostScreen> {
       if (descriptionList != null && descriptionList.isNotEmpty) {
         descriptionList.add(imagePath);
         await prefs.setStringList('descriptionList', descriptionList);
-      }else{
+      } else {
         descriptionList = [];
         descriptionList.add(imagePath);
         await prefs.setStringList('descriptionList', descriptionList);
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

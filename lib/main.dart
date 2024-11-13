@@ -9,9 +9,10 @@ import 'package:insta_dam/screens/signup_screen.dart';
 
 void main() {
   runApp(const InstaDam());
-}
+  }
 
 class InstaDam extends StatelessWidget {
+  final bool isDebugMode = true;
   const InstaDam({super.key});
 
   // This widget is the root of your application.
@@ -21,7 +22,7 @@ class InstaDam extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'InstaDam',
       home: const LandingScreen(),
-      initialRoute: '/landing',
+      initialRoute: isDebugMode ? '/home' : '/landing',
       routes: {
         '/landing': (context) => const LandingScreen(),
         '/login': (context) => const LoginScreen(),
