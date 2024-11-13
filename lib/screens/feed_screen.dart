@@ -22,17 +22,24 @@ class _FeedScreenState extends State<FeedScreen> {
 
   void loadPosts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final postList = PostList();
-    
-    final List<String>? imagePaths = await postList.getList('imageList'); 
+    final postList = SharedPrefList();
+
+    final List<String>? imagePaths = await postList.getList('imageList');
 
     if (imagePaths != null) {
+      final prefs = await SharedPreferences.getInstance();
+      SharedPrefList data = SharedPrefList();
+      int? userId = prefs.getInt('userId');
+      String shared_username = userId != null
+          ? (await data.getDataById('username', userId) ?? 'me')
+          : 'me';
+
       setState(() {
         posts.clear();
 
         for (int i = 0; i < imagePaths.length; i++) {
           posts.add(Post(
-            userName: prefs.getString("username")!,
+            userName: shared_username, //TODO cambiar mas adelante
             postImage: imagePaths[i],
           ));
         }
@@ -51,7 +58,6 @@ class _FeedScreenState extends State<FeedScreen> {
             height: 100,
             child: StoriesWidget(),
           ),
-          
           PostWidget(posts: posts),
         ],
       ),

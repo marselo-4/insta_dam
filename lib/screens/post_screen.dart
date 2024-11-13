@@ -68,7 +68,7 @@ class _PostScreenState extends State<PostScreen> {
       await File(image.path).copy(imagePath);
       
       //Guardar post en shared
-      final postList = PostList();
+      final postList = SharedPrefList();
       List<String>? imageList = await postList.getList('imageList');
       List<String>? descriptionList = await postList.getList('descriptionList');
 

@@ -24,7 +24,7 @@
   }
 
     void loadPosts() async {
-    final postList = PostList();
+    final postList = SharedPrefList();
     
     final List<String>? imagePaths = await postList.getList('imageList'); 
 
@@ -41,11 +41,26 @@
     }
   }
 
-  void loadData() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    username = prefs.getString("username");
+void loadData() async {
+  final prefs = await SharedPreferences.getInstance();
+  SharedPrefList data = SharedPrefList();
+  int? userId = prefs.getInt('userId');
+
+  if (userId != null) {
+    // Usa await para obtener los valores específicos de la lista según el ID del usuario
+    username = await data.getDataById('username', userId);
+    String? name = await data.getDataById('name', userId);
+    String? surname = await data.getDataById('surname', userId);
+    accName = '$name $surname';
+  } else {
+    // Si no hay un userId, toma los valores directamente de SharedPreferences
     accName = '${prefs.getString("name")} ${prefs.getString("surname")}';
   }
+
+  // Actualiza el estado para reflejar los cambios en la interfaz de usuario
+  setState(() {});
+}
+
   
     String followersNumber = Random().nextInt(1000).toString();
     String followingNumber = Random().nextInt(100).toString();

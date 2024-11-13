@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PostList {
+class SharedPrefList {
   // Guarda una lista de strings en SharedPreferences
   Future<void> setList(String key, List<String> list) async {
     final prefs = await SharedPreferences.getInstance();
@@ -11,5 +11,18 @@ class PostList {
   Future<List<String>?> getList(String key) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getStringList(key);
+  }
+  
+  // Obtiene un valor de una lista por su índice (ID)
+  Future<String?> getDataById(String key, int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String>? list = prefs.getStringList(key);
+
+    
+    if (list != null && id >= 0 && id < list.length) {
+      return list[id]; 
+    } else {
+      return null;
+    }
   }
 }
