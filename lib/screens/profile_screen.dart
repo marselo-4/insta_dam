@@ -1,6 +1,9 @@
+  import 'dart:io';
   import 'dart:math';
-
+  import 'package:insta_dam/services/list_storage_services.dart';
   import 'package:flutter/material.dart';
+  import 'package:shared_preferences/shared_preferences.dart';
+
 
   class ProfileScreen extends StatefulWidget {
 
@@ -11,23 +14,59 @@
   }
 
   class _ProfileScreenState extends State<ProfileScreen> {
-    List<String> posts = [
-      'https://picsum.photos/500/800',
-      'https://picsum.photos/500/800',
-      'https://picsum.photos/500/800',
-      'https://picsum.photos/500/800',
-      'https://picsum.photos/500/800',
+    List<String> posts = [];
 
-    ];
+    @override
+  void initState() {
+    super.initState();
+    loadPosts();
+    loadData();
+  }
+
+    void loadPosts() async {
+    final postList = SharedPrefList();
+    
+    final List<String>? imagePaths = await postList.getList('imageList'); 
+
+    if (imagePaths != null) {
+      setState(() {
+        posts.clear();
+
+        for (int i = 0; i < imagePaths.length; i++) {
+          posts.add(imagePaths[i]);
+        }
+      });
+    } else {
+      print('IMAGEPATHS ES NULL');
+    }
+  }
+
+void loadData() async {
+  final prefs = await SharedPreferences.getInstance();
+  SharedPrefList data = SharedPrefList();
+  int? userId = prefs.getInt('userId');
+
+  if (userId != null) {
+    // Usa await para obtener los valores específicos de la lista según el ID del usuario
+    username = await data.getDataById('username', userId);
+    String? name = await data.getDataById('name', userId);
+    String? surname = await data.getDataById('surname', userId);
+    accName = '$name $surname';
+  } else {
+    // Si no hay un userId, toma los valores directamente de SharedPreferences
+    accName = '${prefs.getString("name")} ${prefs.getString("surname")}';
+  }
+
+  // Actualiza el estado para reflejar los cambios en la interfaz de usuario
+  setState(() {});
+}
+
+  
     String followersNumber = Random().nextInt(1000).toString();
     String followingNumber = Random().nextInt(100).toString();
-    String username = "alvaromillaness";
-    String accName = 'Alvaro Millanes Sabaté';
-    String descripcion = 'Viviendo una aventura a la vez 🌍✨\n'
-      'Aquí para compartir lo que amo y lo que hago ❤️\n'
-      'Amante de los pequeños detalles y las grandes experiencias 🌟';
-
-    
+    String? username = "";
+    String? accName = '';
+    String? descripcion = 'Viviendo una aventura a la vez 🌍✨';    
 
     @override
     Widget build(BuildContext context) {
@@ -41,7 +80,7 @@
                     child: Align(
                       alignment: const FractionalOffset(.05, 2),
                       child: Text(
-                      username,
+                      username!,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -106,10 +145,10 @@
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Nombre persona
-                    Text(accName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+                    Text(accName!, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
                   
                   //descripcion
-                  Text(descripcion, maxLines: 5, overflow: TextOverflow.ellipsis,)
+                  Text(descripcion!, maxLines: 5, overflow: TextOverflow.ellipsis,)
                   ],
                   
                 ),
@@ -178,7 +217,7 @@
                     child: Container(
                       height: 50,
                       width: 50,
-                      child: Image.network(posts[index], fit: BoxFit.cover,)
+                      child: Image.file(File(posts[index]), fit: BoxFit.cover,)
                     ),
                   );
                 }

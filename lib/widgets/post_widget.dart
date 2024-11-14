@@ -1,18 +1,21 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
 class Post {
-  final String avatarUrl;
+  //final String avatarImage;
   final String userName;
-  final String postImageUrl;
+  final String postImage;
+  final String description;
   bool isLiked;
   List<Map<String, String>> comments;
 
   Post({
-    required this.avatarUrl,
+    //required this.avatarImage,
     required this.userName,
-    required this.postImageUrl,
+    required this.postImage,
+    required this.description,
     this.isLiked = false,
     this.comments = const [
       {'user': 'Carlos', 'comment': 'Lets fucking go!'},
@@ -51,9 +54,9 @@ class PostWidgetState extends State<PostWidget> {
                   children: [
                     Row(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 20,
-                          backgroundImage: NetworkImage(post.avatarUrl),
+                          backgroundImage: AssetImage('assets/img/avatar.jpg'),
                         ),
                         const SizedBox(width: 10),
                         Text(
@@ -71,7 +74,7 @@ class PostWidgetState extends State<PostWidget> {
                       height: 300,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(post.postImageUrl),
+                          image: FileImage(File(post.postImage)),
                           fit: BoxFit.cover,
                         ),
                         color: Colors.grey[300],
@@ -117,6 +120,8 @@ class PostWidgetState extends State<PostWidget> {
                           ),
                         ),
                         const SizedBox(height: 5),
+                        Text(post.description, style: const TextStyle(fontWeight: FontWeight.w700),),
+                        const SizedBox(height: 5),
                         Text(
                           'View all ${post.comments.length} comments',
                           style: const TextStyle(
@@ -139,37 +144,37 @@ class PostWidgetState extends State<PostWidget> {
                           );
                         }),
                         if (_selectedPostIndex == index)
-                            Row(
+                          Row(
                             children: [
                               Expanded(
-                              child: TextField(
-                                controller: _commentController,
-                                decoration: const InputDecoration(
-                                hintText: 'Add a comment...',
-                                border: InputBorder.none,
+                                child: TextField(
+                                  controller: _commentController,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Add a comment...',
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               ),
-                              ),
                               IconButton(
-                              icon: const Icon(Icons.send_rounded),
-                              onPressed: () {
-                                setState(() {
-                                post.comments = List.from(post.comments)..add({
-                                  'user': post.userName,
-                                  'comment': _commentController.text,
-                                });
-                                _commentController.clear();
-                                _selectedPostIndex = null;
-                                });
-                              },
+                                icon: const Icon(Icons.send_rounded),
+                                onPressed: () {
+                                  setState(() {
+                                    post.comments = List.from(post.comments)
+                                      ..add({
+                                        'user': post.userName,
+                                        'comment': _commentController.text,
+                                      });
+                                    _commentController.clear();
+                                    _selectedPostIndex = null;
+                                  });
+                                },
                               ),
                             ],
-                            ),
+                          ),
                         Text(
-                          Random().nextInt(23)+1 > 1
+                          Random().nextInt(23) + 1 > 1
                               ? '${Random().nextInt(24)} hours ago'
-                              :
-                          '${Random().nextInt(24)} hour ago',
+                              : '${Random().nextInt(24)} hour ago',
                           style: const TextStyle(
                             color: Colors.grey,
                           ),

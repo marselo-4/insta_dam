@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:insta_dam/services/list_storage_services.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -13,6 +14,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool toggleVisibilty2 = true;
 
   TextEditingController controllerUsername = TextEditingController();
+  TextEditingController controllerName = TextEditingController();
+  TextEditingController controllerSurname = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerPassword2 = TextEditingController();
 
@@ -53,8 +56,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: controllerName,
+                      decoration: const InputDecoration(
                         labelText: 'Name',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
@@ -74,8 +78,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 20),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: controllerSurname,
+                      decoration: const InputDecoration(
                         labelText: 'Surname',
                         labelStyle:
                             TextStyle(color: Colors.black, fontSize: 15),
@@ -95,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 20),
-                     TextField(
+                    TextField(
                       controller: controllerUsername,
                       decoration: const InputDecoration(
                         labelText: 'Username',
@@ -193,9 +198,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      
                       _checkInput(
                           controllerUsername,
+                          controllerName,
+                          controllerSurname,
                           controllerPassword,
                           controllerPassword2,
                           context);
@@ -248,30 +254,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-
 }
 
-
-
 Future<void> _checkInput(
-    TextEditingController controllerUsername,
-    TextEditingController controllerPassword,
-    TextEditingController controllerPassword2,
-    BuildContext context) async {
-
-
-  void saveUsername() async{
+  TextEditingController controllerUsername,
+  TextEditingController controllerName,
+  TextEditingController controllerSurname,
+  TextEditingController controllerPassword,
+  TextEditingController controllerPassword2,
+  BuildContext context) async {
+  
+  void saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('username', controllerUsername.text);
-  }
+    final userList = SharedPrefList();
 
-  void savePassword() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('password', controllerPassword.text);
+    Future<List<String>> getOrCreateList(String key) async {
+      List<String>? list = await userList.getList(key);
+      list ??= [];
+      return list;
+    }
+
+    List<String> usernameList = await getOrCreateList('username');
+    List<String> passwordList = await getOrCreateList('password');
+    List<String> nameList = await getOrCreateList('name');
+    List<String> surnameList = await getOrCreateList('surname');
+
+    usernameList.add(controllerUsername.text);
+    passwordList.add(controllerPassword.text);
+    nameList.add(controllerName.text);
+    surnameList.add(controllerSurname.text);
+
+    await prefs.setStringList('username', usernameList);
+    await prefs.setStringList('password', passwordList);
+    await prefs.setStringList('name', nameList);
+    await prefs.setStringList('surname', surnameList);
+
+    int userId = usernameList.indexOf(controllerUsername.text);
+    if (userId != -1) {
+      await prefs.setInt('userId', userId);
+    } else {
+      print('Username not found');
+    }
   }
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? username = prefs.getString("username");
+  List<String>? users = prefs.getStringList('username');
+  bool validUsername = true;
+
+  if (users != null && users.isNotEmpty) {
+    if (users.contains(controllerUsername.text)) {
+      validUsername = false;
+    }
+  }
 
   if (controllerUsername.text.isEmpty || controllerPassword.text.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -294,17 +328,13 @@ Future<void> _checkInput(
         duration: Duration(seconds: 2),
       ),
     );
-  }else if (controllerUsername.text == username) {
+  } else if (!validUsername) {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Username already chosen'), 
-      duration: Duration(seconds: 2),));
+      content: Text('Username already chosen'),
+      duration: Duration(seconds: 2),
+    ));
   } else {
-    savePassword();
-    saveUsername();
+    saveData();
     Navigator.pushNamed(context, '/home');
   }
-
-
 }
-
-
