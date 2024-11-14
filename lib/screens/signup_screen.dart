@@ -295,6 +295,10 @@ Future<void> _checkInput(
     } else {
       print('Username not found');
     }
+
+    await prefs.setString('Username', controllerUsername.text);
+    prefs.setString('Password', controllerPassword.text);
+    //await prefs.setBool('isRemembered', true);
   }
 
   SharedPreferences prefs = await SharedPreferences.getInstance();

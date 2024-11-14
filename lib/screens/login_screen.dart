@@ -150,7 +150,8 @@ class LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
-                      onPressed: () {checkUser();
+                      onPressed: () {
+                        checkUser();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.pinkAccent,
@@ -220,74 +221,76 @@ class LoginScreenState extends State<LoginScreen> {
     });
   }
 
-void checkUser() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  final userList = SharedPrefList();
+  void checkUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userList = SharedPrefList();
 
-  List<String>? usernameList = await userList.getList('username');
-  List<String>? passwordList = await userList.getList('password');
+    List<String>? usernameList = await userList.getList('username');
+    List<String>? passwordList = await userList.getList('password');
 
-  if (usernameList != null && passwordList != null && usernameList.isNotEmpty && passwordList.isNotEmpty) {
-    // Verifica si el nombre de usuario existe en la lista
-    if (usernameList.contains(controllerUsername.text)) {
-      int userNumber = usernameList.indexOf(controllerUsername.text);
+    if (usernameList != null &&
+        passwordList != null &&
+        usernameList.isNotEmpty &&
+        passwordList.isNotEmpty) {
+      // Verifica si el nombre de usuario existe en la lista
+      if (usernameList.contains(controllerUsername.text)) {
+        int userNumber = usernameList.indexOf(controllerUsername.text);
 
-      // Compara la contraseña en la posición del usuario encontrado
-      if (passwordList[userNumber] == controllerPassword.text) {
-        await prefs.setInt('userId', userNumber);
+        // Compara la contraseña en la posición del usuario encontrado
+        if (passwordList[userNumber] == controllerPassword.text) {
+          await prefs.setInt('userId', userNumber);
 
-        Navigator.pushNamed(context, '/home');
+          Navigator.pushNamed(context, '/home');
 
-        if (isRemembered == true) {
+          //if (isRemembered == true) {
           saveCredentials();
+          //}
+        } else {
+          // Contraseña incorrecta
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Incorrect password'),
+              duration: Duration(seconds: 2),
+            ),
+          );
         }
       } else {
-        // Contraseña incorrecta
+        // Usuario no encontrado
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Incorrect password'),
+            content: Text('Username not found'),
             duration: Duration(seconds: 2),
           ),
         );
       }
     } else {
-      // Usuario no encontrado
+      // Listas vacías o nulas
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Username not found'),
+          content: Text('No registered users found. Please sign up first.'),
           duration: Duration(seconds: 2),
         ),
       );
     }
-  } else {
-    // Listas vacías o nulas
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('No registered users found. Please sign up first.'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
-}
-
-
-}
-
-void autoCompleteCredentials(TextEditingController controllerUsername,
-    TextEditingController controllerPassword) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? username = prefs.getString('Username');
-  String? password = prefs.getString('Password');
-
-  if (username != null) {
-    controllerUsername.text = username;
-  } else if (username == null) {
-    controllerUsername.text = "";
   }
 
-  if (password != null) {
-    controllerPassword.text = password;
-  } else if (password == null) {
-    controllerPassword.text = "";
+  void autoCompleteCredentials(TextEditingController controllerUsername,
+      TextEditingController controllerPassword) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? username = prefs.getString('Username');
+    String? password = prefs.getString('Password');
+    if (isRemembered) {
+      if (username != null) {
+        controllerUsername.text = username;
+      } else if (username == null) {
+        controllerUsername.text = "";
+      }
+
+      if (password != null) {
+        controllerPassword.text = password;
+      } else if (password == null) {
+        controllerPassword.text = "";
+      }
+    }
   }
 }
