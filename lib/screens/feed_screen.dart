@@ -38,7 +38,7 @@ class _FeedScreenState extends State<FeedScreen> {
       setState(() {
         posts.clear();
 
-        for (int i = 0; i < imagePaths.length; i++) {
+        for (int i = imagePaths.length -1; i > 0; i--) {
           posts.add(Post(
             userName: shared_username, //TODO cambiar mas adelante
             postImage: imagePaths[i], description: "$shared_username: ${descriptionList![i]}",

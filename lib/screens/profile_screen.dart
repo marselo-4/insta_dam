@@ -32,7 +32,7 @@
       setState(() {
         posts.clear();
 
-        for (int i = 0; i < imagePaths.length; i++) {
+        for (int i = imagePaths.length -1; i > 0; i--) {
           posts.add(imagePaths[i]);
         }
       });
