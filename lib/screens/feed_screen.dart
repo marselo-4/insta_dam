@@ -25,6 +25,8 @@ class _FeedScreenState extends State<FeedScreen> {
     final postList = SharedPrefList();
 
     final List<String>? imagePaths = await postList.getList('imageList');
+        final List<String>? descriptionList = await postList.getList('descriptionList');
+
 
     if (imagePaths != null) {
       final prefs = await SharedPreferences.getInstance();
@@ -40,7 +42,7 @@ class _FeedScreenState extends State<FeedScreen> {
         for (int i = 0; i < imagePaths.length; i++) {
           posts.add(Post(
             userName: shared_username, //TODO cambiar mas adelante
-            postImage: imagePaths[i],
+            postImage: imagePaths[i], description: "$shared_username: ${descriptionList![i]}",
           ));
         }
       });

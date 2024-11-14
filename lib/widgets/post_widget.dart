@@ -8,6 +8,7 @@ class Post {
   //final String avatarImage;
   final String userName;
   final String postImage;
+  final String description;
   bool isLiked;
   List<Map<String, String>> comments;
 
@@ -15,6 +16,7 @@ class Post {
     //required this.avatarImage,
     required this.userName,
     required this.postImage,
+    required this.description,
     this.isLiked = false,
     this.comments = const [
       {'user': 'Carlos', 'comment': 'Lets fucking go!'},
@@ -125,6 +127,8 @@ class PostWidgetState extends State<PostWidget> {
                             color: Colors.grey,
                           ),
                         ),
+                        const SizedBox(height: 5),
+                        Text(post.description),
                         const SizedBox(height: 5),
                         ...post.comments.map((comment) {
                           return Column(

@@ -80,11 +80,11 @@ class _PostScreenState extends State<PostScreen> {
       }
 
       if (descriptionList != null && descriptionList.isNotEmpty) {
-        descriptionList.add(imagePath);
+        descriptionList.add(description);
         await prefs.setStringList('descriptionList', descriptionList);
       } else {
         descriptionList = [];
-        descriptionList.add(imagePath);
+        descriptionList.add(" $description");
         await prefs.setStringList('descriptionList', descriptionList);
       }
     }
