@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 
-
 import 'package:flutter/material.dart';
 
 class Post {
@@ -121,14 +120,14 @@ class PostWidgetState extends State<PostWidget> {
                           ),
                         ),
                         const SizedBox(height: 5),
+                        Text(post.description, style: const TextStyle(fontWeight: FontWeight.w700),),
+                        const SizedBox(height: 5),
                         Text(
                           'View all ${post.comments.length} comments',
                           style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),
-                        const SizedBox(height: 5),
-                        Text(post.description),
                         const SizedBox(height: 5),
                         ...post.comments.map((comment) {
                           return Column(
@@ -145,37 +144,37 @@ class PostWidgetState extends State<PostWidget> {
                           );
                         }),
                         if (_selectedPostIndex == index)
-                            Row(
+                          Row(
                             children: [
                               Expanded(
-                              child: TextField(
-                                controller: _commentController,
-                                decoration: const InputDecoration(
-                                hintText: 'Add a comment...',
-                                border: InputBorder.none,
+                                child: TextField(
+                                  controller: _commentController,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Add a comment...',
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               ),
-                              ),
                               IconButton(
-                              icon: const Icon(Icons.send_rounded),
-                              onPressed: () {
-                                setState(() {
-                                post.comments = List.from(post.comments)..add({
-                                  'user': post.userName,
-                                  'comment': _commentController.text,
-                                });
-                                _commentController.clear();
-                                _selectedPostIndex = null;
-                                });
-                              },
+                                icon: const Icon(Icons.send_rounded),
+                                onPressed: () {
+                                  setState(() {
+                                    post.comments = List.from(post.comments)
+                                      ..add({
+                                        'user': post.userName,
+                                        'comment': _commentController.text,
+                                      });
+                                    _commentController.clear();
+                                    _selectedPostIndex = null;
+                                  });
+                                },
                               ),
                             ],
-                            ),
+                          ),
                         Text(
-                          Random().nextInt(23)+1 > 1
+                          Random().nextInt(23) + 1 > 1
                               ? '${Random().nextInt(24)} hours ago'
-                              :
-                          '${Random().nextInt(24)} hour ago',
+                              : '${Random().nextInt(24)} hour ago',
                           style: const TextStyle(
                             color: Colors.grey,
                           ),

@@ -21,7 +21,6 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 
   void loadPosts() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     final postList = SharedPrefList();
 
     final List<String>? imagePaths = await postList.getList('imageList');

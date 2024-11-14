@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:insta_dam/screens/feed_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
