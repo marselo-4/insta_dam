@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:insta_dam/widgets/post_widget.dart';
 import 'package:insta_dam/widgets/view_post_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:share_plus/share_plus.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -201,7 +203,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        Share.share('Mira mi perfil de InstaDam! Me llamo $username y tengo ${posts.length} publicaciones! 🌍✨');
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
