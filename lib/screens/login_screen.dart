@@ -35,12 +35,12 @@ class LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/img/logo.jpg",
+                  "assets/img/logo.webp",
                   width: 200,
                   height: 100,
                 ),
                 Image.asset(
-                  "assets/img/instadam.jpg",
+                  "assets/img/instadam.webp",
                   width: 300,
                   height: 100,
                 ),

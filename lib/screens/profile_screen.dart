@@ -100,7 +100,7 @@ void loadData() async {
                   children: [
                     const Align(
                       alignment: FractionalOffset(.2, .5),
-                      child: CircleAvatar(backgroundImage: AssetImage('assets/img/avatar.jpg'),
+                      child: CircleAvatar(backgroundImage: AssetImage('assets/img/avatar.webp'),
                       radius: 45,)
                     ),
                     

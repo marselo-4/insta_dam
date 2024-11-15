@@ -53,8 +53,8 @@ class _LandingScreenState extends State<LandingScreen> {
         },
         children: [
           landingWidget(
-              "assets/img/ilustracion.png", "¡Capture. Share Your Story!"),
-          landingWidget("assets/img/phone.png", "¡Create. Connect. Inspire!"),
+              "assets/img/ilustracion.webp", "¡Capture. Share Your Story!"),
+          landingWidget("assets/img/phone.webp", "¡Create. Connect. Inspire!"),
           Container()
         ],
       ),

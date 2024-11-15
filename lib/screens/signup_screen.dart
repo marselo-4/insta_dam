@@ -29,12 +29,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/img/logo.jpg",
+                "assets/img/logo.webp",
                 width: 100,
                 height: 75,
               ),
               Image.asset(
-                "assets/img/instadam.jpg",
+                "assets/img/instadam.webp",
                 width: 150,
                 height: 60,
               ),
