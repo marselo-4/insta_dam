@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         posts.clear();
 
-        for (int i = 0; i < imagePaths.length; i++) {
+        for (int i = imagePaths.length -1; i >= 0; i--) {
           posts.add(Post(
               postImage: imagePaths[i],
               description: descriptionList![i],
@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Align(
                       alignment: FractionalOffset(.2, .5),
                       child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/img/avatar.jpg'),
+                        backgroundImage: AssetImage('assets/img/avatar.webp'),
                         radius: 45,
                       )),
                   Column(

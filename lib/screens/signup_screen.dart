@@ -29,12 +29,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/img/logo.jpg",
+                "assets/img/logo.webp",
                 width: 100,
                 height: 75,
               ),
               Image.asset(
-                "assets/img/instadam.jpg",
+                "assets/img/instadam.webp",
                 width: 150,
                 height: 60,
               ),
@@ -295,6 +295,10 @@ Future<void> _checkInput(
     } else {
       print('Username not found');
     }
+
+    await prefs.setString('Username', controllerUsername.text);
+    prefs.setString('Password', controllerPassword.text);
+    //await prefs.setBool('isRemembered', true);
   }
 
   SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -1,0 +1,1 @@
+// Aqui va un refactor de toda la logia de shared en un futuro Firebase ahora dentro de las clases
