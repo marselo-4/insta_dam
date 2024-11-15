@@ -8,7 +8,7 @@ class EditProfileWidget extends StatefulWidget {
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
-  String imagePath = 'assets/img/avatar.jpg';
+  String imagePath = 'assets/img/avatar.webp';
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
