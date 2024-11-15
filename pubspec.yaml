@@ -44,7 +44,7 @@ dependencies:
 
 flutter_icons:
   android: true
-  ios: true
+  ios: false
   image_path: "assets/img/icon.webp"
 
 dev_dependencies:
