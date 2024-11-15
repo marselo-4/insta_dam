@@ -12,7 +12,7 @@ void main() {
   }
 
 class InstaDam extends StatelessWidget {
-  final bool isDebugMode = true;
+  final bool isDebugMode = false;
   const InstaDam({super.key});
 
   // This widget is the root of your application.

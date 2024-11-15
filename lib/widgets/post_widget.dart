@@ -56,7 +56,7 @@ class PostWidgetState extends State<PostWidget> {
                       children: [
                         const CircleAvatar(
                           radius: 20,
-                          backgroundImage: AssetImage('assets/img/avatar.jpg'),
+                          backgroundImage: AssetImage('assets/img/avatar.webp'),
                         ),
                         const SizedBox(width: 10),
                         Text(
