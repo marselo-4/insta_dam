@@ -2,9 +2,8 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-Widget ViewPostWidget(String descripcion, String userName, String postImage, bool isLiked) {
+Widget viewPostWidget(String descripcion, String userName, String postImage, bool isLiked) {
   return Card(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: SizedBox(
               width: double.infinity,
               child: Padding(
@@ -41,7 +40,7 @@ Widget ViewPostWidget(String descripcion, String userName, String postImage, boo
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Row(
+                    /*Row(
                       children: [
                         IconButton(
                           icon: Icon(
@@ -64,6 +63,9 @@ Widget ViewPostWidget(String descripcion, String userName, String postImage, boo
                           onPressed: () {},
                         ),
                       ],
+                    ),*/
+                    const SizedBox(
+                      height: 10,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -230,8 +230,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: const EdgeInsets.all(2),
                       child: GestureDetector(
                           onTap: () {
-                            print(posts[index]);
-                            //TODO: HACER QUE AL HACER CLICK EN UNA IMAGEN SE ABRA LA PANTALLA DE VIEW POST
                             showDialog(
                               context: context,
                               builder: (context) => Dialog(
@@ -239,12 +237,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     constraints: BoxConstraints(
                                       maxHeight:
                                           MediaQuery.of(context).size.height *
-                                              0.6,
+                                              0.7,
                                       maxWidth:
                                           MediaQuery.of(context).size.width *
                                               0.8,
                                     ),
-                                    child: ViewPostWidget(
+                                    child: viewPostWidget(
                                         "$username: ${posts[index].description} ",
                                         username ?? "",
                                         posts[index].postImage,
