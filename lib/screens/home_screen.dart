@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/img/instadam.jpg',
+          'assets/img/instadam.webp',
           height: 30,
         ),
         automaticallyImplyLeading: false,

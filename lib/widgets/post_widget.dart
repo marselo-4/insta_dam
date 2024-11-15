@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 
 class Post {
@@ -56,7 +56,7 @@ class PostWidgetState extends State<PostWidget> {
                       children: [
                         const CircleAvatar(
                           radius: 20,
-                          backgroundImage: AssetImage('assets/img/avatar.jpg'),
+                          backgroundImage: AssetImage('assets/img/avatar.webp'),
                         ),
                         const SizedBox(width: 10),
                         Text(
@@ -106,7 +106,9 @@ class PostWidgetState extends State<PostWidget> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.send_rounded),
-                          onPressed: () {},
+                          onPressed: () {
+                            Share.shareXFiles([XFile(post.postImage)], text: post.description);
+                          },
                         ),
                       ],
                     ),
