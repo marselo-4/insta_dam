@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:insta_dam/services/list_storage_services.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_dam/widgets/edit_profile_widget.dart';
 import 'package:insta_dam/widgets/post_widget.dart';
 import 'package:insta_dam/widgets/view_post_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -180,7 +181,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                                              onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxHeight: MediaQuery.of(context).size.height * 0.7,
+                                  maxWidth: MediaQuery.of(context).size.width * 0.8,
+                                ),
+                                child: EditProfileWidget(),
+                              ),
+                            ),
+                          );
+                        },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
