@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 
 class Post {
@@ -106,7 +106,9 @@ class PostWidgetState extends State<PostWidget> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.send_rounded),
-                          onPressed: () {},
+                          onPressed: () {
+                            Share.shareXFiles([XFile(post.postImage)], text: post.description);
+                          },
                         ),
                       ],
                     ),
