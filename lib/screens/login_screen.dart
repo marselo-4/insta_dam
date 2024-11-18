@@ -28,178 +28,178 @@ class LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/img/logo.webp",
-                  width: 200,
-                  height: 100,
-                ),
-                Image.asset(
-                  "assets/img/instadam.webp",
-                  width: 300,
-                  height: 100,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  'Connect through images',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'roboto',
-                    letterSpacing: 1.2,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/img/logo.webp",
+                    width: 200,
+                    height: 100,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: controllerUsername,
-                        decoration: const InputDecoration(
-                          labelText: 'Username',
-                          labelStyle:
-                              TextStyle(color: Colors.black, fontSize: 15),
-                          prefixIcon: Icon(
-                            Icons.person,
-                            color: Colors.pinkAccent,
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.pinkAccent, width: 3.0),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 50),
-                      TextField(
-                        controller: controllerPassword,
-                        decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: const TextStyle(
-                                color: Colors.black, fontSize: 15),
-                            enabledBorder: const UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 2.0),
+                  Image.asset(
+                    "assets/img/instadam.webp",
+                    width: 300,
+                    height: 100,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Connect through images',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'roboto',
+                      letterSpacing: 1.2,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: controllerUsername,
+                          decoration: const InputDecoration(
+                            labelText: 'Username',
+                            labelStyle:
+                                TextStyle(color: Colors.black, fontSize: 15),
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.pinkAccent,
                             ),
-                            focusedBorder: const UnderlineInputBorder(
+                            focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.pinkAccent, width: 3.0),
                             ),
-                            prefixIcon: const Icon(
-                              Icons.lock_outline_rounded,
-                              color: Colors.pinkAccent,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 2.0),
                             ),
-                            suffixIcon: IconButton(
-                              color: Colors.pinkAccent,
-                              icon: Icon(notvisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility),
-                              onPressed: () {
-                                setState(() {
-                                  notvisible = !notvisible;
-                                });
-                              },
-                            )),
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        obscureText: notvisible,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            activeColor: Colors.pinkAccent,
-                            value: isRemembered,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isRemembered = value!;
-                                saveRememberMe();
-                              });
-                            },
-                          ),
-                          const Text(
-                            'Remember me',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        checkUser();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.pinkAccent,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 60, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                      child: const Text(
-                        'Enter',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Don't have an account?",
-                          style: TextStyle(
-                            fontSize: 16,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/signup");
-                          },
-                          child: const Text(
-                            "Sign up here!",
-                            style: TextStyle(
+                        const SizedBox(height: 50),
+                        TextField(
+                          controller: controllerPassword,
+                          decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 15),
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 2.0),
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.pinkAccent, width: 3.0),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline_rounded,
                                 color: Colors.pinkAccent,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
+                              ),
+                              suffixIcon: IconButton(
+                                color: Colors.pinkAccent,
+                                icon: Icon(notvisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                                onPressed: () {
+                                  setState(() {
+                                    notvisible = !notvisible;
+                                  });
+                                },
+                              )),
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          obscureText: notvisible,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              activeColor: Colors.pinkAccent,
+                              value: isRemembered,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isRemembered = value!;
+                                  saveRememberMe();
+                                });
+                              },
+                            ),
+                            const Text(
+                              'Remember me',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
                         )
                       ],
                     ),
-                  ],
-                )
-              ],
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          checkUser();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.pinkAccent,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 15),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Text(
+                          'Enter',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don't have an account?",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/signup");
+                            },
+                            child: const Text(
+                              "Sign up here!",
+                              style: TextStyle(
+                                  color: Colors.pinkAccent,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
     );
   }
 
