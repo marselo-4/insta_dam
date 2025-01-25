@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:insta_dam/controller/last_session_controller.dart';
+import 'package:insta_dam/main.dart';
+import 'package:insta_dam/services/sql_service.dart';
 import 'package:insta_dam/widgets/landing_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,6 +38,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   void _navigateToLogin() {
     Navigator.of(context).pushNamed('/login');
+    lastSessionController('/login');
   }
 
   @override
@@ -49,6 +53,7 @@ class _LandingScreenState extends State<LandingScreen> {
         onPageChanged: (index) {
           if (index == 2) {
             _navigateToLogin();
+            lastSessionController('/landing');
           }
         },
         children: [

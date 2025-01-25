@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_dam/controller/last_session_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:insta_dam/services/list_storage_services.dart';
 
@@ -236,6 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, "/login");
+                            lastSessionController('/login');
                           },
                           child: const Text(
                             "Log in here!",
@@ -257,13 +259,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 }
 
 Future<void> _checkInput(
-  TextEditingController controllerUsername,
-  TextEditingController controllerName,
-  TextEditingController controllerSurname,
-  TextEditingController controllerPassword,
-  TextEditingController controllerPassword2,
-  BuildContext context) async {
-  
+    TextEditingController controllerUsername,
+    TextEditingController controllerName,
+    TextEditingController controllerSurname,
+    TextEditingController controllerPassword,
+    TextEditingController controllerPassword2,
+    BuildContext context) async {
   void saveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final userList = SharedPrefList();
@@ -340,5 +341,6 @@ Future<void> _checkInput(
   } else {
     saveData();
     Navigator.pushNamed(context, '/home');
+    lastSessionController('/home');
   }
 }

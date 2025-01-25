@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_dam/controller/last_session_controller.dart';
 import 'package:insta_dam/screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +17,15 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index;
     });
+    if (index == 0) {
+      lastSessionController('/home');
+    } else if (index == 1) {
+      lastSessionController('/post');
+    } else if (index == 2) {
+      lastSessionController('/profile');
+    } else if (index == 3) {
+      lastSessionController('/settings');
+    }
     _pageController.jumpToPage(index);
   }
 
@@ -36,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
             _selectedIndex = index;
           });
         },
-        physics: const NeverScrollableScrollPhysics(), // Disable horizontal scrolling
+        physics:
+            const NeverScrollableScrollPhysics(), // Disable horizontal scrolling
         children: const [
           FeedScreen(),
           PostScreen(),

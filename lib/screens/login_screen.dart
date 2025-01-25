@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:insta_dam/controller/last_session_controller.dart';
+import 'package:insta_dam/services/sql_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:insta_dam/services/list_storage_services.dart';
 
@@ -12,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   bool notvisible = true;
   bool isRemembered = true;
+  
 
   TextEditingController controllerUsername = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
@@ -19,6 +22,7 @@ class LoginScreenState extends State<LoginScreen> {
   void initState() {
     loadRememberMe();
     autoCompleteCredentials(controllerUsername, controllerPassword);
+    lastSessionController('/login');
     super.initState();
   }
 
@@ -34,6 +38,7 @@ class LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  TextButton(onPressed: (){SqlService.selectSessionPath();}, child: SizedBox()),
                   Image.asset(
                     "assets/img/logo.webp",
                     width: 200,
@@ -182,6 +187,8 @@ class LoginScreenState extends State<LoginScreen> {
                           TextButton(
                             onPressed: () {
                               Navigator.pushNamed(context, "/signup");
+                              lastSessionController('/signup');
+
                             },
                             child: const Text(
                               "Sign up here!",
@@ -241,6 +248,8 @@ class LoginScreenState extends State<LoginScreen> {
           await prefs.setInt('userId', userNumber);
 
           Navigator.pushNamed(context, '/home');
+          lastSessionController('/home');
+
 
           //if (isRemembered == true) {
           saveCredentials();

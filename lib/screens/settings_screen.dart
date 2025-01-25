@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_dam/controller/last_session_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -53,6 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
+                lastSessionController('/login');
               },
               child: const Text(
                 "Log out",
