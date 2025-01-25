@@ -30,9 +30,19 @@ class SqlService {
     var sessionPath = await db.rawQuery(
         "SELECT sesion_path FROM sessionData ORDER BY ROWID DESC LIMIT 1");
 
+    String ruta = "";
 
-    String ruta = sessionPath.first['sesion_path'] as String;
-    print("function -->"+ ruta);
+    if (sessionPath.isNotEmpty) {
+      
+      if (sessionPath.first['sesion_path'] != null) {
+      ruta = sessionPath.first['sesion_path'] as String;
+      print("function -->"+ ruta);
+    }else{
+      ruta = "/landing";
+    }
+    }
+
+    
     
     return ruta;
   }

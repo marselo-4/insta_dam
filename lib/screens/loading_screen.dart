@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:insta_dam/screens/home_screen.dart';
+import 'package:insta_dam/screens/landing_screen.dart';
+import 'package:insta_dam/screens/login_screen.dart';
+import 'package:insta_dam/screens/post_screen.dart';
+import 'package:insta_dam/screens/profile_screen.dart';
 import 'package:insta_dam/screens/settings_screen.dart';
+import 'package:insta_dam/screens/signup_screen.dart';
 import 'package:insta_dam/services/sql_service.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -30,25 +35,32 @@ class _LoadingScreenState extends State<LoadingScreen> {
         child: FutureBuilder<String>(
           future: widget.getRoute(),
           builder: (context, snapshot) {
-        
             if (snapshot.hasData) {
               print('${snapshot.data}');
 
               WidgetsBinding.instance.addPostFrameCallback((_) =>
-                                    
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    
-                    switch (snapshot.data!) 
-                    {
-                      case ('/settings'):
+                    switch (snapshot.data!) {
+                      case '/loading':
+                        return const LoadingScreen();
+                      case '/landing':
+                        return const LandingScreen();
+                      case '/login':
+                        return const LoginScreen();
+                      case '/signup':
+                        return const SignUpScreen();
+                      case '/home':
+                        return const HomeScreen();
+                      case '/post':
+                        return const PostScreen();
+                      case '/profile':
+                        return const ProfileScreen();
+                      case '/settings':
                         return const SettingsScreen();
-
                       default:
                         return const HomeScreen();
                     }
-
                   })));
-              
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
