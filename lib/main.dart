@@ -38,7 +38,7 @@ class _InstaDamState extends State<InstaDam> {
               '/landing': (context) => const LandingScreen(),
               '/login': (context) => const LoginScreen(),
               '/signup': (context) => const SignUpScreen(),
-              '/home': (context) => const HomeScreen(),
+              '/home': (context) => HomeScreen(0),
               '/post': (context) => const PostScreen(),
               '/profile': (context) => const ProfileScreen(),
               '/settings': (context) => const SettingsScreen(),

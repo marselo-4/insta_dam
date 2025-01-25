@@ -50,15 +50,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
                       case '/signup':
                         return const SignUpScreen();
                       case '/home':
-                        return const HomeScreen();
+                        return HomeScreen(0);
                       case '/post':
-                        return const PostScreen();
+                        return HomeScreen(1);
                       case '/profile':
-                        return const ProfileScreen();
+                        return HomeScreen(2);
                       case '/settings':
-                        return const SettingsScreen();
+                        return HomeScreen(3);
                       default:
-                        return const HomeScreen();
+                        return HomeScreen(0);
                     }
                   })));
             } else if (snapshot.hasError) {

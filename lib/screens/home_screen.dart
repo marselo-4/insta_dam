@@ -3,30 +3,41 @@ import 'package:insta_dam/controller/last_session_controller.dart';
 import 'package:insta_dam/screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final int initialIndex;
+
+  HomeScreen(this.initialIndex, {super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  late int selectedIndex;
   final PageController _pageController = PageController();
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.initialIndex;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _pageController.jumpToPage(selectedIndex);
     });
-    if (index == 0) {
+  }
+
+  void _onItemTapped(int indexParam) {
+    setState(() {
+      selectedIndex = indexParam;
+    });
+    if (indexParam == 0) {
       lastSessionController('/home');
-    } else if (index == 1) {
+    } else if (indexParam == 1) {
       lastSessionController('/post');
-    } else if (index == 2) {
+    } else if (indexParam == 2) {
       lastSessionController('/profile');
-    } else if (index == 3) {
+    } else if (indexParam == 3) {
       lastSessionController('/settings');
     }
-    _pageController.jumpToPage(index);
+    _pageController.jumpToPage(indexParam);
   }
 
   @override
@@ -43,11 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _pageController,
         onPageChanged: (index) {
           setState(() {
-            _selectedIndex = index;
+            selectedIndex = index;
           });
         },
-        physics:
-            const NeverScrollableScrollPhysics(), // Disable horizontal scrolling
+        physics: const NeverScrollableScrollPhysics(), // Disable horizontal scrolling
         children: const [
           FeedScreen(),
           PostScreen(),
@@ -56,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
